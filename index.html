@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Gitscm-next : current version of the git-scm.com site" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Gitscm-next</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/erotictrendset/gitscm-next">View on GitHub</a>
+
+          <h1 id="project_title">Gitscm-next</h1>
+          <h2 id="project_tagline">current version of the git-scm.com site</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/erotictrendset/gitscm-next/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/erotictrendset/gitscm-next/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Git Homepage <a href="http://travis-ci.org/github/gitscm-next"><img src="https://secure.travis-ci.org/github/gitscm-next.png?branch=master" alt="Build Status"></a>
+</h1>
+
+<p>This is the web application for the <a href="http://git-scm.com">git-scm.com</a> site.  It is meant to be the
+first place that a person new to Git will land and download or learn about the
+Git SCM system.</p>
+
+<p>This app is written in Ruby on Rails and deployed on Heroku.</p>
+
+<h2>Setup</h2>
+
+<p>You'll need a Ruby environment to run Rails.  First do:</p>
+
+<pre><code>$ rvm use 1.9.2
+$ bundle install
+</code></pre>
+
+<p>Then you need to create the database structure:</p>
+
+<pre><code>$ rake db:migrate
+</code></pre>
+
+<p>Now you'll want to populate the man pages.  You can do so from a local Git
+source clone like this:</p>
+
+<pre><code>$ GIT_REPO=../git/.git rake local_index
+</code></pre>
+
+<p>Or you can do it from GitHub (much slower) like this:</p>
+
+<pre><code>$ rake preindex
+</code></pre>
+
+<p>Now you need to get the latest downloads for the downloads pages:</p>
+
+<pre><code>$ rake downloads
+</code></pre>
+
+<p>Now you'll probably want some book data. You'll have
+to have access to the progit project on the Github through the API.</p>
+
+<pre><code>$ export API_USER=github_username
+$ export API_PASS=github_password
+$ rake remote_genbook
+</code></pre>
+
+<p>That will generate the book content from the markdown files fetched from the online repository  and post it to the Rails server database.</p>
+
+<p>Now you can run the Rails site to take a look.  Specify an UPDATE_TOKEN so you
+can use the world's stupidest authentication mechanism:</p>
+
+<pre><code>$ UPDATE_TOKEN=something rails server
+</code></pre>
+
+<p>The site should be running on http://localhost:3000</p>
+
+<h2>Testing</h2>
+
+<p>To run the tests for this project, run:</p>
+
+<pre><code>$ rake test
+</code></pre>
+
+<p>To run the website for testing purposes, run:</p>
+
+<pre><code>$ bundle exec rackup config.ru
+</code></pre>
+
+<h2>Contributing</h2>
+
+<p>If you wish to contribute to this website, please <a href="https://github.com/github/gitscm-next">fork it on GitHub</a>, push your
+change to a named branch, then send me a pull request. If it is a big feature,
+you might want to contact me first to make sure it's something that I'll
+accept.  If it involves code, please also write tests for it.</p>
+
+<h2>License</h2>
+
+<p>This source code for the site is licensed under the MIT, which you can find in
+the MIT-LICENSE.txt file.</p>
+
+<p>All graphical assets are licensed under the
+<a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Gitscm-next maintained by <a href="https://github.com/erotictrendset">erotictrendset</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
